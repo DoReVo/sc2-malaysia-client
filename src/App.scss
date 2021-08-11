@@ -1,6 +1,6 @@
-.App {
-  .title-bro {
-    font-size: 10em;
-    color: red;
-  }
+.interval-group {
+  @apply flex flex-row justify-between;
+  @apply rounded-lg
+  @apply bg-white;
+  @apply text-3xl;
 }
