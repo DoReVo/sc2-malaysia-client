@@ -1,6 +1,5 @@
 import React from "react";
 import { ReactElement } from "react";
-
 interface CardProps {
   title: string;
   data: number;

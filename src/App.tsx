@@ -1,6 +1,6 @@
 import { Tab } from "@headlessui/react";
 import React, { useEffect, useState } from "react";
-import { useRegisterSW } from "virtual:pwa-register/react";
+import AppVersion from "./Components/AppVersion";
 import DashboardDisplayCard from "./Components/DashboardDisplayCard";
 import HeaderBar from "./Components/HeaderBar";
 import RefreshPrompt from "./Components/RefreshPrompt";
@@ -183,6 +183,7 @@ function App() {
         </Tab.Panels>
       </Tab.Group>
       <RefreshPrompt />
+      <AppVersion />
     </div>
   );
 }

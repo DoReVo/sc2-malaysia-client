@@ -1,7 +1,7 @@
 .App {
   background: linear-gradient(191.87deg, #856bdb 1.11%, #a390e4 100%);
 
-  @apply h-screen max-h-full;
+  @apply min-h-screen max-h-full;
   @apply px-5 py-2;
 }
 
