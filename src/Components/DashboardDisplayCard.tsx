@@ -6,7 +6,10 @@ interface CardProps {
   data: number;
 }
 
-function Card({ title, data }: CardProps): ReactElement<CardProps> {
+function DashboardDisplayCard({
+  title,
+  data,
+}: CardProps): ReactElement<CardProps> {
   return (
     <div className="card">
       <div className="card-title">{title}</div>
@@ -15,4 +18,4 @@ function Card({ title, data }: CardProps): ReactElement<CardProps> {
   );
 }
 
-export default Card;
+export default DashboardDisplayCard;
