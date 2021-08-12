@@ -1,0 +1,32 @@
+.refresh-prompt {
+  @apply m-auto;
+  @apply text-center;
+  @apply bg-white rounded-lg;
+  @apply self-center;
+  @apply p-3;
+  @apply w-60;
+
+  .info-text {
+    @apply font-oswald text-left font-light;
+    @apply mb-2;
+  }
+
+  .reload-btn,
+  .close-btn {
+    @apply outline-none focus:outline-none;
+    @apply font-oswald uppercase;
+    @apply text-white shadow-lg;
+    @apply px-3 py-1 rounded-lg;
+    @apply w-20 mx-1;
+  }
+
+  .reload-btn {
+    @apply bg-blue-500;
+    @apply active:bg-blue-600;
+  }
+
+  .close-btn {
+    @apply bg-red-500;
+    @apply active:bg-red-600;
+  }
+}

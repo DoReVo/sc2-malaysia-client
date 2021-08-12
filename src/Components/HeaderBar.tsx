@@ -1,11 +1,39 @@
 import React, { ReactElement } from "react";
+import { useRegisterSW } from "virtual:pwa-register/react";
 
-function HeaderBar(): ReactElement {
+interface Props {
+  InstallPrompt: BeforeInstallPromptEvent | null;
+}
+
+function HeaderBar({ InstallPrompt }: Props): ReactElement<Props> {
+  const {
+    offlineReady: [offlineReady],
+  } = useRegisterSW();
+
   const date = new Date();
+
+  const installPWA = () => {
+    if (InstallPrompt) InstallPrompt.prompt();
+  };
+
+  const isStandAlone = () => {
+    if (window.matchMedia("(display-mode: standalone)").matches) return true;
+    else return false;
+  };
+
   return (
     <div className="header-bar">
       <div className="app-title">SC2-Malaysia</div>
-      <div className="app-date">{date.toLocaleDateString()}</div>
+      <div className="right-items">
+        {isStandAlone() && (
+          <div className="app-date">{date.toLocaleDateString()}</div>
+        )}
+        {!isStandAlone() && (
+          <button className="app-install-btn" onClick={() => installPWA()}>
+            Install
+          </button>
+        )}
+      </div>
     </div>
   );
 }

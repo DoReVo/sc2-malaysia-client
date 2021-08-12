@@ -5,8 +5,23 @@
     @apply text-xl font-bold uppercase;
   }
 
-  & > .app-title,
-  & > .app-date {
+  & .app-title,
+  & .app-date,
+  & .app-install-btn {
     @apply text-white font-oswald;
+  }
+
+  & > .right-items {
+    @apply flex justify-between;
+
+    & > .app-install-btn {
+      @apply text-center align-middle;
+      @apply outline-none focus:outline-none;
+      @apply text-sm uppercase;
+      @apply bg-secondary rounded-lg;
+      @apply shadow-lg;
+      @apply w-16;
+      @apply active:bg-secondary-darker;
+    }
   }
 }

@@ -1,7 +1,9 @@
 import { Tab } from "@headlessui/react";
-import React, { RefObject, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRegisterSW } from "virtual:pwa-register/react";
 import DashboardDisplayCard from "./Components/DashboardDisplayCard";
 import HeaderBar from "./Components/HeaderBar";
+import RefreshPrompt from "./Components/RefreshPrompt";
 
 interface DashboardData {
   cases: number;
@@ -28,6 +30,9 @@ function App() {
     deaths: 0,
     vaccinated: { firstDose: 0, secondDose: 0, total: 0 },
   });
+
+  const [deferredPrompt, setDeferredPrompt] =
+    useState<BeforeInstallPromptEvent | null>(null);
 
   const API_URL = import.meta.env.VITE_API_URL;
 
@@ -75,17 +80,27 @@ function App() {
     }
   };
 
+  /* Fetch data on component load */
   useEffect(() => {
     getData();
   }, []);
 
+  /* Fetch data on interval change */
   useEffect(() => {
     getData();
   }, [dataInterval]);
 
+  // Save the install prompt
+  useEffect(() => {
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e as BeforeInstallPromptEvent);
+    });
+  }, []);
+
   return (
     <div className="App">
-      <HeaderBar />
+      <HeaderBar InstallPrompt={deferredPrompt} />
       <Tab.Group
         onChange={(index) => setDataInterval(index)}
         defaultIndex={dataInterval}
@@ -96,7 +111,7 @@ function App() {
           <Tab className="interval-item">Monthly</Tab>
         </Tab.List>
         <Tab.Panels>
-          <Tab.Panel>
+          <Tab.Panel className="dashboard-data">
             <DashboardDisplayCard
               data={dashboardData.cases}
               title={"Total Cases"}
@@ -118,7 +133,7 @@ function App() {
               title={"2st Dose Vaccinated"}
             />
           </Tab.Panel>
-          <Tab.Panel>
+          <Tab.Panel className="dashboard-data">
             <DashboardDisplayCard
               data={dashboardData.cases}
               title={"Total Cases"}
@@ -140,7 +155,7 @@ function App() {
               title={"2st Dose Vaccinated"}
             />
           </Tab.Panel>
-          <Tab.Panel>
+          <Tab.Panel className="dashboard-data">
             <DashboardDisplayCard
               data={dashboardData.cases}
               title={"Total Cases"}
@@ -164,6 +179,7 @@ function App() {
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
+      <RefreshPrompt />
     </div>
   );
 }
