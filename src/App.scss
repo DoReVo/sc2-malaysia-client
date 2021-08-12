@@ -1,6 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap");
+
+.App {
+  background: linear-gradient(191.87deg, #856bdb 1.11%, #a390e4 100%);
+
+  @apply h-screen max-h-full;
+  @apply px-5 py-2;
+}
+
 .interval-group {
-  @apply flex flex-row justify-between;
-  @apply rounded-lg;
+  @apply flex flex-1 flex-row justify-between;
+  @apply rounded-[10px];
   @apply bg-white;
-  @apply text-8xl;
+  @apply text-xl;
+  @apply max-w-lg;
+  @apply text-center;
+  @apply col-start-2 col-span-10;
+  @apply self-center;
+  @apply h-[30px];
+  @apply my-5 px-0;
+  @apply border-none;
+  @apply overflow-hidden;
+  @apply outline-none;
+  @apply shadow;
+
+  & > .interval-item {
+    @apply flex place-items-center;
+    @apply px-4;
+    @apply text-black bg-white;
+    @apply font-merriweather;
+    @apply text-[13px];
+    @apply transition-colors duration-75;
+    @apply border-none;
+    @apply rounded-[10px];
+    @apply my-0.5 mx-0.5;
+    @apply outline-none;
+    @apply hover:bg-primary-darker hover:text-white;
+
+    &[aria-selected="true"] {
+      @apply text-white;
+      @apply bg-primary;
+    }
+  }
 }

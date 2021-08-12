@@ -1,0 +1,12 @@
+.header-bar {
+  @apply flex justify-between;
+
+  & > .app-title {
+    @apply text-xl font-bold uppercase;
+  }
+
+  & > .app-title,
+  & > .app-date {
+    @apply text-white font-oswald;
+  }
+}

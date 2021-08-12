@@ -4,4 +4,16 @@ import reactRefresh from "@vitejs/plugin-react-refresh";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [reactRefresh()],
+  css: {
+    modules: {
+      scopeBehaviour: "local",
+    },
+    postcss: {
+      plugins: [
+        require("tailwindcss/nesting"),
+        require("tailwindcss"),
+        require("autoprefixer"),
+      ],
+    },
+  },
 });

@@ -1,0 +1,22 @@
+.card {
+  @apply grid grid-cols-12;
+  @apply px-3 py-1;
+  @apply rounded-lg;
+  @apply bg-white;
+  @apply font-merriweather;
+  @apply shadow-xl;
+  @apply mb-5;
+
+  & > .card-title {
+    @apply text-[13px];
+    @apply text-secondary;
+    @apply col-span-full;
+  }
+
+  & > .card-data {
+    @apply col-span-full;
+    @apply text-center text-primary-darker;
+    @apply mb-[30px] mt-3;
+    @apply text-5xl;
+  }
+}
