@@ -3,9 +3,10 @@ import { useRegisterSW } from "virtual:pwa-register/react";
 
 interface Props {
   InstallPrompt: BeforeInstallPromptEvent | null;
+  installed: boolean;
 }
 
-function HeaderBar({ InstallPrompt }: Props): ReactElement<Props> {
+function HeaderBar({ InstallPrompt, installed }: Props): ReactElement<Props> {
   const {
     offlineReady: [offlineReady],
   } = useRegisterSW();
@@ -25,10 +26,10 @@ function HeaderBar({ InstallPrompt }: Props): ReactElement<Props> {
     <div className="header-bar">
       <div className="app-title">SC2-Malaysia</div>
       <div className="right-items">
-        {isStandAlone() && (
+        {installed && (
           <div className="app-date">{date.toLocaleDateString()}</div>
         )}
-        {!isStandAlone() && (
+        {!isStandAlone() && !installed && (
           <button className="app-install-btn" onClick={() => installPWA()}>
             Install
           </button>

@@ -34,6 +34,8 @@ function App() {
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
 
+  const [installed, setInstalled] = useState<boolean>(true);
+
   const API_URL = import.meta.env.VITE_API_URL;
 
   const getData = async () => {
@@ -95,12 +97,13 @@ function App() {
     window.addEventListener("beforeinstallprompt", (e) => {
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
+      setInstalled(false);
     });
   }, []);
 
   return (
     <div className="App">
-      <HeaderBar InstallPrompt={deferredPrompt} />
+      <HeaderBar InstallPrompt={deferredPrompt} installed={installed} />
       <Tab.Group
         onChange={(index) => setDataInterval(index)}
         defaultIndex={dataInterval}
