@@ -1,6 +1,6 @@
 {
   "name": "sc2-malaysia-client",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

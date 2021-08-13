@@ -30,7 +30,7 @@ export default ({ mode }) => {
           ],
           theme_color: "#856bdb",
           background_color: "#856bdb",
-          start_url: "sc2.izzatfaris.site",
+          start_url: "sc2.izzatfaris.site/?src=pwa",
         },
         workbox: {
           runtimeCaching: [
