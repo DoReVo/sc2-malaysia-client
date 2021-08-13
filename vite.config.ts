@@ -53,8 +53,8 @@ export default ({ mode }) => {
       }),
       ViteRadar({
         enableDev: true,
-        gtm: {
-          id: process.env.VITE_GTM_ID,
+        analytics: {
+          id: process.env.VITE_GOOGLE_TAG_ID,
         },
       }),
     ],
