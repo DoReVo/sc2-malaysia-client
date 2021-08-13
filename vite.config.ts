@@ -3,6 +3,7 @@ import reactRefresh from "@vitejs/plugin-react-refresh";
 import { VitePWA } from "vite-plugin-pwa";
 import ViteRadar from "vite-plugin-radar";
 import { visualizer } from "rollup-plugin-visualizer";
+import ViteFonts from "vite-plugin-fonts";
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
@@ -56,6 +57,11 @@ export default ({ mode }) => {
         enableDev: true,
         analytics: {
           id: process.env.VITE_GOOGLE_TAG_ID,
+        },
+      }),
+      ViteFonts({
+        google: {
+          families: ["Merriweather", "Oswald"],
         },
       }),
     ],
