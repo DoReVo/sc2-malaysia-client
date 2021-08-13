@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from "vite";
 import reactRefresh from "@vitejs/plugin-react-refresh";
 import { VitePWA } from "vite-plugin-pwa";
 import ViteRadar from "vite-plugin-radar";
+import { visualizer } from "rollup-plugin-visualizer";
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
@@ -58,6 +59,17 @@ export default ({ mode }) => {
         },
       }),
     ],
+    build: {
+      rollupOptions: {
+        plugins: [
+          visualizer({
+            open: process.env.ANALYZE_BUNDLE ? true : false,
+            gzipSize: true,
+            brotliSize: true,
+          }),
+        ],
+      },
+    },
 
     css: {
       modules: {
