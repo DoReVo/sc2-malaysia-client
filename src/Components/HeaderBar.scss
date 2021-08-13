@@ -2,6 +2,7 @@
   @apply flex justify-between;
 
   & > .app-title {
+    @apply flex items-end;
     @apply text-xl font-bold uppercase;
   }
 
@@ -9,6 +10,11 @@
   & .app-date,
   & .app-install-btn {
     @apply text-white font-oswald;
+  }
+
+  & .app-date {
+    @apply flex items-center;
+    @apply text-xs sm:text-sm md:text-lg;
   }
 
   & > .right-items {

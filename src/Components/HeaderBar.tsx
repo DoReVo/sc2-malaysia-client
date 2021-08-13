@@ -27,7 +27,7 @@ function HeaderBar({ InstallPrompt, installed }: Props): ReactElement<Props> {
       <div className="app-title">SC2-Malaysia</div>
       <div className="right-items">
         {installed && (
-          <div className="app-date">{date.toLocaleDateString()}</div>
+          <div className="app-date">Today is {date.toLocaleDateString()}</div>
         )}
         {!isStandAlone() && !installed && (
           <button className="app-install-btn" onClick={() => installPWA()}>

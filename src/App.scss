@@ -3,6 +3,10 @@
 
   @apply min-h-screen max-h-full;
   @apply px-5 py-2;
+
+  & > .dashboard-page {
+    @apply max-w-2xl mx-auto;
+  }
 }
 
 .interval-group {

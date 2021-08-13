@@ -7,7 +7,7 @@
   @apply mb-5;
 
   & > .card-title {
-    @apply text-[13px];
+    @apply text-[13px] md:text-base;
     @apply text-secondary;
     @apply col-span-full;
     @apply font-merriweather;
@@ -16,8 +16,13 @@
   & > .card-data {
     @apply col-span-full;
     @apply text-center text-primary-darker;
-    @apply mb-[30px] mt-3;
-    @apply text-5xl;
+    @apply mb-[20px] mt-3;
+    @apply text-5xl md:text-6xl;
     @apply font-oswald tracking-wider;
+  }
+
+  & > .as-of-date {
+    @apply col-span-full;
+    @apply text-right text-secondary text-xs md:text-sm italic;
   }
 }
