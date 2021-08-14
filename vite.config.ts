@@ -75,6 +75,19 @@ export default ({ mode }) => {
       htmlPlugin({
         metas: [
           {
+            name: "og:title",
+            content: "Malaysia SARS-CoV-2 Tracker",
+          },
+          {
+            name: "og:description",
+            content:
+              "Dashboard for keeping track of COVID-19 cases, deaths and vaccination status in Malaysia",
+          },
+          {
+            name: "og:image",
+            content: "https://sc2.izzatfaris.site/app-logo.png",
+          },
+          {
             name: "twitter:card",
             content: "summary",
           },
@@ -94,6 +107,10 @@ export default ({ mode }) => {
             name: "twitter:description",
             content:
               "Dashboard for keeping track of COVID-19 cases, deaths and vaccination status in Malaysia",
+          },
+          {
+            name: "twitter:image",
+            content: "https://sc2.izzatfaris.site/app-logo.png",
           },
         ],
       }),
