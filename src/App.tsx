@@ -1,5 +1,5 @@
 import { Tab } from "@headlessui/react";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import AppVersion from "./Components/AppVersion";
 import DashboardDisplayCard from "./Components/DashboardDisplayCard";
 import HeaderBar from "./Components/HeaderBar";
@@ -69,6 +69,8 @@ function App() {
     }
   };
 
+  const interval: Dashboard.interval[] = ["daily", "weekly", "monthly"];
+
   /* Fetch data on component load */
   useEffect(() => {
     getData();
@@ -101,118 +103,48 @@ function App() {
             <Tab className="interval-item">Weekly</Tab>
             <Tab className="interval-item">Monthly</Tab>
           </Tab.List>
-          <Tab.Panels>
-            <Tab.Panel className="dashboard-data">
-              <DashboardDisplayCard
-                data={dashboardData.caseData.cases}
-                date={dashboardData.caseData.as_of}
-                className="card-main"
-                title={"Positive Cases"}
-                interval={"daily"}
-              />
-              <DashboardDisplayCard
-                data={dashboardData.deathData.deaths}
-                date={dashboardData.deathData.as_of}
-                className="card-death"
-                title={"Deaths"}
-                interval={"daily"}
-              />
-              <DashboardDisplayCard
-                data={dashboardData.vaccinatedData.total}
-                date={dashboardData.vaccinatedData.as_of}
-                className="card-vaccinated"
-                title={"Vaccinated"}
-                interval={"daily"}
-              />
-              <DashboardDisplayCard
-                data={dashboardData.vaccinatedData.firstDose}
-                date={dashboardData.vaccinatedData.as_of}
-                title={"Dose 1"}
-                className="dose"
-                interval={"daily"}
-              />
-              <DashboardDisplayCard
-                data={dashboardData.vaccinatedData.secondDose}
-                date={dashboardData.vaccinatedData.as_of}
-                title={"Dose 2"}
-                className="dose"
-                interval={"daily"}
-              />
-            </Tab.Panel>
-            <Tab.Panel className="dashboard-data">
-              <DashboardDisplayCard
-                data={dashboardData.caseData.cases}
-                date={dashboardData.caseData.as_of}
-                className="card-main"
-                title={"Positive Cases"}
-                interval={"weekly"}
-              />
-              <DashboardDisplayCard
-                data={dashboardData.deathData.deaths}
-                date={dashboardData.deathData.as_of}
-                className="card-death"
-                title={"Deaths"}
-                interval={"weekly"}
-              />
-              <DashboardDisplayCard
-                data={dashboardData.vaccinatedData.total}
-                date={dashboardData.vaccinatedData.as_of}
-                className="card-vaccinated"
-                title={"Vaccinated"}
-                interval={"weekly"}
-              />
-              <DashboardDisplayCard
-                data={dashboardData.vaccinatedData.firstDose}
-                date={dashboardData.vaccinatedData.as_of}
-                title={"Dose 1"}
-                className="dose"
-                interval={"weekly"}
-              />
-              <DashboardDisplayCard
-                data={dashboardData.vaccinatedData.secondDose}
-                date={dashboardData.vaccinatedData.as_of}
-                title={"Dose 2"}
-                className="dose"
-                interval={"weekly"}
-              />
-            </Tab.Panel>
-            <Tab.Panel className="dashboard-data">
-              <DashboardDisplayCard
-                data={dashboardData.caseData.cases}
-                date={dashboardData.caseData.as_of}
-                className="card-main"
-                title={"Positive Cases"}
-                interval={"monthly"}
-              />
-              <DashboardDisplayCard
-                data={dashboardData.deathData.deaths}
-                date={dashboardData.deathData.as_of}
-                className="card-death"
-                title={"Deaths"}
-                interval={"monthly"}
-              />
-              <DashboardDisplayCard
-                data={dashboardData.vaccinatedData.total}
-                date={dashboardData.vaccinatedData.as_of}
-                className="card-vaccinated"
-                title={"Vaccinated"}
-                interval={"monthly"}
-              />
-              <DashboardDisplayCard
-                data={dashboardData.vaccinatedData.firstDose}
-                date={dashboardData.vaccinatedData.as_of}
-                title={"Dose 1"}
-                className="dose"
-                interval={"monthly"}
-              />
-              <DashboardDisplayCard
-                data={dashboardData.vaccinatedData.secondDose}
-                date={dashboardData.vaccinatedData.as_of}
-                title={"Dose 2"}
-                className="dose"
-                interval={"monthly"}
-              />
-            </Tab.Panel>
+          <Tab.Panels as={Fragment}>
+            {interval.map((intervalName) => {
+              return (
+                <Tab.Panel key={intervalName} className="dashboard-data">
+                  <DashboardDisplayCard
+                    data={dashboardData.caseData.cases}
+                    date={dashboardData.caseData.as_of}
+                    className="card-main"
+                    title={"Positive Cases"}
+                    interval={intervalName}
+                  />
+                  <DashboardDisplayCard
+                    data={dashboardData.deathData.deaths}
+                    date={dashboardData.deathData.as_of}
+                    className="card-death"
+                    title={"Deaths"}
+                    interval={intervalName}
+                  />
+                  <DashboardDisplayCard
+                    data={dashboardData.vaccinatedData.total}
+                    date={dashboardData.vaccinatedData.as_of}
+                    className="card-vaccinated"
+                    title={"Vaccinated"}
+                    interval={intervalName}
+                  />
+                  <DashboardDisplayCard
+                    data={dashboardData.vaccinatedData.firstDose}
+                    date={dashboardData.vaccinatedData.as_of}
+                    title={"Dose 1"}
+                    className="dose"
+                    interval={intervalName}
+                  />
+                  <DashboardDisplayCard
+                    data={dashboardData.vaccinatedData.secondDose}
+                    date={dashboardData.vaccinatedData.as_of}
+                    title={"Dose 2"}
+                    className="dose"
+                    interval={intervalName}
+                  />
+                </Tab.Panel>
+              );
+            })}
           </Tab.Panels>
         </Tab.Group>
         <RefreshPrompt />
