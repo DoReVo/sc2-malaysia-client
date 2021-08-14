@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDrag } from "react-use-gesture";
 import AppVersion from "./Components/AppVersion";
 import DashboardDisplayCard from "./Components/DashboardDisplayCard";
 import HeaderBar from "./Components/HeaderBar";
@@ -77,6 +78,32 @@ function App() {
     });
   }, []);
 
+  const bindSwipe = useDrag(
+    ({ swipe: [swipeX] }) => {
+      if (swipeX !== 0) {
+        // Find the index of the currently selected interval
+        const index = interval.findIndex(
+          (interval) => interval === dataInterval
+        );
+        if (swipeX === -1) {
+          if (index < 2) {
+            setDataInterval(interval[index + 1]);
+          }
+        }
+        if (swipeX === 1) {
+          if (index > 0) {
+            setDataInterval(interval[index - 1]);
+          }
+        }
+      }
+    },
+    {
+      filterTaps: true,
+      swipeDistance: 10,
+      swipeVelocity: 0.2,
+    }
+  );
+
   return (
     <div className="App">
       <div className="dashboard-page">
@@ -86,8 +113,8 @@ function App() {
             return (
               <div
                 onClick={() => setDataInterval(intervalName)}
-                className={`interval-item ${
-                  dataInterval === intervalName ? "selected" : ""
+                className={`interval-item${
+                  dataInterval === intervalName ? " selected" : ""
                 }`}
                 key={index}
               >
@@ -96,7 +123,7 @@ function App() {
             );
           })}
         </div>
-        <div className="dashboard-data">
+        <div className="dashboard-data" {...bindSwipe()}>
           <DashboardDisplayCard
             data={dashboardData.caseData.cases}
             date={dashboardData.caseData.as_of}
