@@ -30,8 +30,8 @@ export default ({ mode }) => {
               type: "image/png",
             },
           ],
-          theme_color: "#856bdb",
-          background_color: "#856bdb",
+          theme_color: "#a08ce3",
+          background_color: "#a08ce3",
           start_url: "sc2.izzatfaris.site/?src=pwa",
         },
         workbox: {
