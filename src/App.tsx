@@ -88,6 +88,12 @@ function App() {
       setDeferredPrompt(e as BeforeInstallPromptEvent);
       setInstalled(false);
     });
+
+    window.addEventListener("appinstalled", (e) => {
+      e.preventDefault();
+      setDeferredPrompt(null);
+      setInstalled(true);
+    });
   }, []);
 
   return (
