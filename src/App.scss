@@ -1,5 +1,5 @@
 .App {
-  background: linear-gradient(191.87deg, #856bdb 1.11%, #a390e4 100%);
+  background-color: #a08ce3;
 
   @apply min-h-screen max-h-full;
   @apply px-5 py-2;
@@ -12,31 +12,30 @@
 .interval-group {
   @apply flex flex-1 flex-row justify-between;
   @apply rounded-[10px];
-  @apply bg-white;
+  @apply bg-primary-darker;
   @apply text-xl;
   @apply max-w-lg;
   @apply text-center;
   @apply col-start-2 col-span-10;
   @apply self-center;
-  @apply h-[30px];
   @apply m-auto my-5 px-0;
   @apply border-none;
   @apply overflow-hidden;
   @apply outline-none;
-  @apply shadow;
 
   & > .interval-item {
     @apply flex place-items-center;
-    @apply px-4;
-    @apply text-black bg-white;
+    @apply px-4 py-0.5;
     @apply font-merriweather;
     @apply text-[13px];
-    @apply transition-colors duration-75;
     @apply border-none;
     @apply rounded-[10px];
-    @apply my-0.5 mx-0.5;
+    @apply my-1.5 mx-1;
     @apply outline-none;
-    @apply hover:bg-primary-darker hover:text-white;
+    @apply hover:bg-primary;
+    @apply text-white;
+    @apply no-tap-effect;
+    @apply transition-colors duration-150;
 
     &[aria-selected="true"] {
       @apply text-white;
@@ -46,5 +45,7 @@
 }
 
 .dashboard-data {
+  @apply grid grid-cols-2 auto-rows-min;
+  @apply gap-x-5;
   @apply outline-none focus:outline-none;
 }

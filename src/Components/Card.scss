@@ -1,28 +1,137 @@
 .card {
   @apply grid grid-cols-12;
-  @apply px-3 py-1;
-  @apply rounded-lg;
-  @apply bg-white;
-  @apply shadow-xl;
-  @apply mb-5;
+  @apply px-3 py-2;
+  @apply bg-primary-darker;
+  @apply filter drop-shadow;
 
-  & > .card-title {
-    @apply text-[13px] md:text-base;
-    @apply text-secondary;
+  &:not(.card-main):not(.dose) {
+    @apply min-h-[130px];
+
+    & > .card-data {
+      @apply text-2xl md:text-4xl;
+      @apply tracking-wider;
+    }
+  }
+
+  &:not(.card-main) {
+    @apply rounded-lg;
+    @apply mb-2;
+  }
+
+  &:not(.dose) {
     @apply col-span-full;
-    @apply font-merriweather;
+
+    & > .card-title {
+      @apply bg-primary-lightest;
+      @apply rounded-xl;
+      @apply py-1 px-2;
+      @apply col-span-6;
+
+      & > span {
+        @apply text-white text-[13px];
+        @apply font-montserrat font-medium;
+      }
+
+      & > div {
+        @apply w-[10px] h-[10px] rounded-[2.5px];
+      }
+    }
+
+    & > .card-data {
+      @apply col-span-full row-span-3;
+      @apply self-center;
+    }
+
+    & > .card-trend {
+      @apply flex items-center space-x-0;
+      @apply col-start-11 col-span-2;
+      @apply max-h-[30px];
+      @apply min-w-max;
+
+      & > .trend-data {
+        font-feature-settings: "pnum" on, "lnum" on, "zero" on, "liga" on;
+
+        @apply font-merriweather;
+        @apply font-bold;
+        @apply flex flex-col;
+
+        & > .trend-number {
+          @apply text-xs text-white;
+        }
+
+        & > .trend-text {
+          @apply text-[5px] text-[#EBE5FF];
+        }
+      }
+    }
   }
 
   & > .card-data {
-    @apply col-span-full;
-    @apply text-center text-primary-darker;
-    @apply mb-[20px] mt-3;
-    @apply text-5xl md:text-6xl;
-    @apply font-oswald tracking-wider;
+    @apply text-center text-white;
+    @apply font-merriweather font-bold;
+
+    font-feature-settings: "pnum" on, "lnum" on, "zero" on, "liga" on;
+  }
+
+  & > .card-title {
+    @apply flex items-center space-x-1;
+    @apply max-w-max;
+    @apply max-h-[30px];
   }
 
   & > .as-of-date {
-    @apply col-span-full;
-    @apply text-right text-secondary text-xs md:text-sm italic;
+    @apply col-span-full place-self-end;
+    @apply text-right text-white text-xs md:text-sm italic;
+  }
+}
+
+.card-main {
+  @apply rounded-2xl;
+  @apply mb-5;
+  @apply min-h-[200px];
+
+  & > .card-title > div {
+    background-color: #ffda47;
+  }
+
+  & > .card-data {
+    @apply text-4xl md:text-5xl;
+    @apply tracking-widest;
+  }
+}
+
+.card-death {
+  & > .card-title > div {
+    background-color: #f36a68;
+  }
+}
+
+.card-vaccinated {
+  & > .card-title > div {
+    background-color: #55d6c2;
+  }
+}
+
+.dose {
+  & > .card-title {
+    @apply col-span-6;
+
+    & > span {
+      @apply text-xs;
+      @apply text-white;
+    }
+  }
+
+  & > .card-data {
+    @apply col-start-7 col-span-9 self-end justify-self-end;
+    @apply text-[15px] text-center;
+  }
+
+  & > .card-trend {
+    @apply hidden;
+  }
+
+  & > .as-of-date {
+    @apply hidden;
   }
 }

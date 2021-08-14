@@ -5,3 +5,9 @@
 @import "./Components/Card.scss";
 @import "./Components/HeaderBar.scss";
 @import "./Components//RefreshPrompt.scss";
+
+@layer components {
+  .no-tap-effect {
+    -webkit-tap-highlight-color: transparent;
+  }
+}

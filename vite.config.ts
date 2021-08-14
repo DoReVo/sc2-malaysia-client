@@ -61,7 +61,14 @@ export default ({ mode }) => {
       }),
       ViteFonts({
         google: {
-          families: ["Merriweather", "Oswald"],
+          families: [
+            { name: "Merriweather", styles: "wght@700" },
+            { name: "Oswald" },
+            {
+              name: "Montserrat",
+              styles: "wght@500",
+            },
+          ],
         },
       }),
     ],

@@ -106,81 +106,111 @@ function App() {
               <DashboardDisplayCard
                 data={dashboardData.caseData.cases}
                 date={dashboardData.caseData.as_of}
-                title={"Total Cases"}
+                className="card-main"
+                title={"Positive Cases"}
+                interval={"daily"}
               />
               <DashboardDisplayCard
                 data={dashboardData.deathData.deaths}
                 date={dashboardData.deathData.as_of}
-                title={"Total Death"}
+                className="card-death"
+                title={"Deaths"}
+                interval={"daily"}
               />
               <DashboardDisplayCard
                 data={dashboardData.vaccinatedData.total}
                 date={dashboardData.vaccinatedData.as_of}
-                title={"Total Vaccinated"}
+                className="card-vaccinated"
+                title={"Vaccinated"}
+                interval={"daily"}
               />
               <DashboardDisplayCard
                 data={dashboardData.vaccinatedData.firstDose}
                 date={dashboardData.vaccinatedData.as_of}
-                title={"1st Dose Vaccinated"}
+                title={"Dose 1"}
+                className="dose"
+                interval={"daily"}
               />
               <DashboardDisplayCard
                 data={dashboardData.vaccinatedData.secondDose}
                 date={dashboardData.vaccinatedData.as_of}
-                title={"2st Dose Vaccinated"}
+                title={"Dose 2"}
+                className="dose"
+                interval={"daily"}
               />
             </Tab.Panel>
             <Tab.Panel className="dashboard-data">
               <DashboardDisplayCard
                 data={dashboardData.caseData.cases}
                 date={dashboardData.caseData.as_of}
-                title={"Total Cases"}
+                className="card-main"
+                title={"Positive Cases"}
+                interval={"weekly"}
               />
               <DashboardDisplayCard
                 data={dashboardData.deathData.deaths}
                 date={dashboardData.deathData.as_of}
-                title={"Total Death"}
+                className="card-death"
+                title={"Deaths"}
+                interval={"weekly"}
               />
               <DashboardDisplayCard
                 data={dashboardData.vaccinatedData.total}
                 date={dashboardData.vaccinatedData.as_of}
-                title={"Total Vaccinated"}
+                className="card-vaccinated"
+                title={"Vaccinated"}
+                interval={"weekly"}
               />
               <DashboardDisplayCard
                 data={dashboardData.vaccinatedData.firstDose}
                 date={dashboardData.vaccinatedData.as_of}
-                title={"1st Dose Vaccinated"}
+                title={"Dose 1"}
+                className="dose"
+                interval={"weekly"}
               />
               <DashboardDisplayCard
                 data={dashboardData.vaccinatedData.secondDose}
                 date={dashboardData.vaccinatedData.as_of}
-                title={"2st Dose Vaccinated"}
+                title={"Dose 2"}
+                className="dose"
+                interval={"weekly"}
               />
             </Tab.Panel>
             <Tab.Panel className="dashboard-data">
               <DashboardDisplayCard
                 data={dashboardData.caseData.cases}
                 date={dashboardData.caseData.as_of}
-                title={"Total Cases"}
+                className="card-main"
+                title={"Positive Cases"}
+                interval={"monthly"}
               />
               <DashboardDisplayCard
                 data={dashboardData.deathData.deaths}
                 date={dashboardData.deathData.as_of}
-                title={"Total Death"}
+                className="card-death"
+                title={"Deaths"}
+                interval={"monthly"}
               />
               <DashboardDisplayCard
                 data={dashboardData.vaccinatedData.total}
                 date={dashboardData.vaccinatedData.as_of}
-                title={"Total Vaccinated"}
+                className="card-vaccinated"
+                title={"Vaccinated"}
+                interval={"monthly"}
               />
               <DashboardDisplayCard
                 data={dashboardData.vaccinatedData.firstDose}
                 date={dashboardData.vaccinatedData.as_of}
-                title={"1st Dose Vaccinated"}
+                title={"Dose 1"}
+                className="dose"
+                interval={"monthly"}
               />
               <DashboardDisplayCard
                 data={dashboardData.vaccinatedData.secondDose}
                 date={dashboardData.vaccinatedData.as_of}
-                title={"2st Dose Vaccinated"}
+                title={"Dose 2"}
+                className="dose"
+                interval={"monthly"}
               />
             </Tab.Panel>
           </Tab.Panels>
