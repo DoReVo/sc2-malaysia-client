@@ -99,8 +99,8 @@ function App() {
     },
     {
       filterTaps: true,
-      swipeDistance: 10,
-      swipeVelocity: 0.2,
+      swipeDistance: 5,
+      swipeVelocity: 0.1,
     }
   );
 
