@@ -34,6 +34,7 @@ export default ({ mode }) => {
           theme_color: "#a08ce3",
           background_color: "#a08ce3",
           start_url: "/?src=pwa",
+          scope: "/",
         },
         workbox: {
           runtimeCaching: [
