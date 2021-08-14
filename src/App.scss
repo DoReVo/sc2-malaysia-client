@@ -37,7 +37,7 @@
     @apply no-tap-effect;
     @apply transition-colors duration-150;
 
-    &[aria-selected="true"] {
+    &.selected {
       @apply text-white;
       @apply bg-primary;
     }

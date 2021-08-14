@@ -5,7 +5,7 @@ interface CardProps {
   data: number;
   date: string;
   className?: string;
-  interval: "daily" | "weekly" | "monthly";
+  interval: Dashboard.interval;
 }
 
 function DashboardDisplayCard({
@@ -20,9 +20,9 @@ function DashboardDisplayCard({
   };
 
   const trendText =
-    interval === "daily"
+    interval === "Daily"
       ? "than yesterday"
-      : interval === "weekly"
+      : interval === "Weekly"
       ? "than last week"
       : "than last month";
 
@@ -32,7 +32,7 @@ function DashboardDisplayCard({
         <div></div>
         <span>{title}</span>
       </div>
-     {/*  <div className="card-trend">
+      {/*  <div className="card-trend">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"

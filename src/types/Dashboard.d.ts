@@ -1,5 +1,5 @@
 declare module Dashboard {
-  type interval = "daily" | "weekly" | "monthly";
+  type interval = "Daily" | "Weekly" | "Monthly";
   interface DashboardData {
     caseData: CasesData;
     deathData: DeathsData;
