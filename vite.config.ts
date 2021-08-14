@@ -86,7 +86,15 @@ export default ({ mode }) => {
           },
           {
             name: "og:image",
-            content: "https://sc2.izzatfaris.site/app-logo.png",
+            content: "/app-logo.png",
+          },
+          {
+            name: "og:url",
+            content: "https://sc2.izzatfaris.site",
+          },
+          {
+            name: "og:type",
+            content: "website",
           },
           {
             name: "twitter:card",
@@ -111,7 +119,7 @@ export default ({ mode }) => {
           },
           {
             name: "twitter:image",
-            content: "https://sc2.izzatfaris.site/app-logo.png",
+            content: "/app-logo.png",
           },
         ],
       }),
