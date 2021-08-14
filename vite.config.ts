@@ -4,6 +4,7 @@ import { VitePWA } from "vite-plugin-pwa";
 import ViteRadar from "vite-plugin-radar";
 import { visualizer } from "rollup-plugin-visualizer";
 import ViteFonts from "vite-plugin-fonts";
+import htmlPlugin from "vite-plugin-html-config";
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
@@ -70,6 +71,31 @@ export default ({ mode }) => {
             },
           ],
         },
+      }),
+      htmlPlugin({
+        metas: [
+          {
+            name: "twitter:card",
+            content: "app",
+          },
+          {
+            name: "twitter:site",
+            content: "DoReVo",
+          },
+          {
+            name: "twitter:creator",
+            content: "DoReVo",
+          },
+          {
+            name: "twitter:description",
+            content:
+              "Dashboard for keeping track of COVID-19 status in Malaysia",
+          },
+          {
+            name: "twitter:app:url:ipad",
+            content: "https://sc2.izzatfaris.site",
+          },
+        ],
       }),
     ],
     build: {
