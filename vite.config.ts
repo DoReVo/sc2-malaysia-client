@@ -76,7 +76,7 @@ export default ({ mode }) => {
         metas: [
           {
             name: "twitter:card",
-            content: "app",
+            content: "summary",
           },
           {
             name: "twitter:site",
@@ -87,13 +87,13 @@ export default ({ mode }) => {
             content: "DoReVo",
           },
           {
-            name: "twitter:description",
-            content:
-              "Dashboard for keeping track of COVID-19 status in Malaysia",
+            name: "twitter:title",
+            content: "Malaysia SARS-CoV-2 Tracker",
           },
           {
-            name: "twitter:app:url:ipad",
-            content: "https://sc2.izzatfaris.site",
+            name: "twitter:description",
+            content:
+              "Dashboard for keeping track of COVID-19 cases, deaths and vaccination status in Malaysia",
           },
         ],
       }),
