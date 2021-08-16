@@ -51,7 +51,7 @@ function DashboardDisplayCard({
         </div>
       </div> */}
 
-      <div className="card-data">{data.toLocaleString() || 0}</div>
+      <div className="card-data">{data ? data.toLocaleString() : 0}</div>
       <div className="as-of-date">updated {renderDate(date)}</div>
     </div>
   );
