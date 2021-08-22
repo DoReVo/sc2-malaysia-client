@@ -6,11 +6,6 @@
 
   &:not(.card-main):not(.dose) {
     @apply min-h-[130px];
-
-    & > .card-data {
-      @apply text-2xl md:text-4xl;
-      @apply tracking-wider;
-    }
   }
 
   &:not(.card-main) {
@@ -26,10 +21,12 @@
       @apply rounded-xl;
       @apply py-1 px-2;
       @apply col-span-6;
+      @apply xxs:justify-self-center xxs:col-span-full;
 
       & > span {
         @apply text-white text-[13px];
         @apply font-montserrat font-medium;
+        @apply break-all;
       }
 
       & > div {
@@ -40,28 +37,29 @@
     & > .card-data {
       @apply col-span-full row-span-3;
       @apply self-center;
+      @apply text-4xl;
+      @apply xxs:text-3xl;
+      @apply tracking-wider;
     }
 
     & > .card-trend {
       @apply flex items-center space-x-0;
-      @apply col-start-11 col-span-2;
+      @apply col-start-10 col-span-3 justify-self-end;
       @apply max-h-[30px];
       @apply min-w-max;
+      @apply xxs:hidden;
 
-      & > .trend-data {
+      & > .trend-number {
         font-feature-settings: "pnum" on, "lnum" on, "zero" on, "liga" on;
 
         @apply font-merriweather;
         @apply font-bold;
         @apply flex flex-col;
+        @apply text-white;
+      }
 
-        & > .trend-number {
-          @apply text-xs text-white;
-        }
-
-        & > .trend-text {
-          @apply text-[5px] text-[#EBE5FF];
-        }
+      & > .trend-svg {
+        @apply w-5 h-5;
       }
     }
   }
@@ -81,7 +79,7 @@
 
   & > .as-of-date {
     @apply col-span-full place-self-end;
-    @apply text-right text-white text-xs md:text-sm italic;
+    @apply text-right text-white text-sm italic;
   }
 }
 
@@ -92,11 +90,6 @@
 
   & > .card-title > div {
     background-color: #ffda47;
-  }
-
-  & > .card-data {
-    @apply text-4xl md:text-5xl;
-    @apply tracking-widest;
   }
 }
 
@@ -115,6 +108,7 @@
 .dose {
   & > .card-title {
     @apply col-span-6;
+    @apply xxs:col-span-full xxs:justify-self-center;
 
     & > span {
       @apply text-xs;
@@ -125,6 +119,7 @@
   & > .card-data {
     @apply col-start-7 col-span-9 self-end justify-self-end;
     @apply text-[15px] text-center;
+    @apply xxs:col-span-full xxs:justify-self-center;
   }
 
   & > .card-trend {

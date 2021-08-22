@@ -14,7 +14,7 @@
 
   & .app-date {
     @apply flex items-center;
-    @apply text-xs sm:text-sm md:text-lg;
+    @apply text-lg;
   }
 
   & > .right-items {

@@ -1,9 +1,9 @@
 declare module Dashboard {
   type interval = "Daily" | "Weekly" | "Monthly";
   interface DashboardData {
-    caseData: CasesData;
-    deathData: DeathsData;
-    vaccinatedData: VaccinatedData;
+    caseData: CasesData & PerfomanceData<CasesData>;
+    deathData: DeathsData & PerfomanceData<DeathsData>;
+    vaccinatedData: VaccinatedData & PerfomanceData<VaccinatedData>;
   }
 
   interface VaccinatedData {
@@ -21,5 +21,13 @@ declare module Dashboard {
   interface DeathsData {
     deaths: number;
     as_of: string;
+  }
+
+  interface Trend<T> {
+    [key: string]: number;
+  }
+
+  interface PerfomanceData<T> {
+    perfomanceBetweenInterval: Partial<T>;
   }
 }

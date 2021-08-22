@@ -14,13 +14,26 @@ function App() {
   */
   const [dataInterval, setDataInterval] = useState<Dashboard.interval>("Daily");
   const [dashboardData, setDasboardData] = useState<Dashboard.DashboardData>({
-    caseData: { cases: 0, as_of: new Date().toLocaleDateString() },
-    deathData: { deaths: 0, as_of: new Date().toLocaleDateString() },
+    caseData: {
+      cases: 0,
+      as_of: new Date().toLocaleDateString(),
+      perfomanceBetweenInterval: { cases: 0 },
+    },
+    deathData: {
+      deaths: 0,
+      as_of: new Date().toLocaleDateString(),
+      perfomanceBetweenInterval: { deaths: 0 },
+    },
     vaccinatedData: {
       firstDose: 0,
       secondDose: 0,
       total: 0,
       as_of: new Date().toLocaleDateString(),
+      perfomanceBetweenInterval: {
+        firstDose: 0,
+        secondDose: 0,
+        total: 0,
+      },
     },
   });
 
@@ -130,6 +143,10 @@ function App() {
             className="card-main"
             title={"Positive Cases"}
             interval={dataInterval}
+            trendNumber={
+              dashboardData?.caseData?.perfomanceBetweenInterval?.cases ??
+              (null as any)
+            }
           />
           <DashboardDisplayCard
             data={dashboardData.deathData.deaths}
@@ -137,6 +154,10 @@ function App() {
             className="card-death"
             title={"Deaths"}
             interval={dataInterval}
+            trendNumber={
+              dashboardData?.deathData?.perfomanceBetweenInterval?.deaths ??
+              (null as any)
+            }
           />
           <DashboardDisplayCard
             data={dashboardData.vaccinatedData.total}
@@ -144,6 +165,10 @@ function App() {
             className="card-vaccinated"
             title={"Vaccinated"}
             interval={dataInterval}
+            trendNumber={
+              dashboardData?.vaccinatedData?.perfomanceBetweenInterval?.total ??
+              (null as any)
+            }
           />
           <DashboardDisplayCard
             data={dashboardData.vaccinatedData.firstDose}
@@ -151,6 +176,10 @@ function App() {
             title={"Dose 1"}
             className="dose"
             interval={dataInterval}
+            trendNumber={
+              dashboardData?.vaccinatedData?.perfomanceBetweenInterval
+                ?.firstDose ?? (null as any)
+            }
           />
           <DashboardDisplayCard
             data={dashboardData.vaccinatedData.secondDose}
@@ -158,6 +187,10 @@ function App() {
             title={"Dose 2"}
             className="dose"
             interval={dataInterval}
+            trendNumber={
+              dashboardData?.vaccinatedData?.perfomanceBetweenInterval
+                ?.secondDose ?? (null as any)
+            }
           />
         </div>
         <RefreshPrompt />
