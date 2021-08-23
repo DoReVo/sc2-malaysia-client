@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement } from "react";
 import { useRegisterSW } from "virtual:pwa-register/react";
 
 function RefreshPrompt(): ReactElement {

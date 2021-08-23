@@ -1,0 +1,40 @@
+.interval-group {
+  @apply flex flex-1 flex-row justify-between;
+  @apply rounded-[10px];
+  @apply bg-primary-darker;
+  @apply text-xl;
+  @apply max-w-lg;
+  @apply text-center;
+  @apply col-start-2 col-span-10;
+  @apply self-center;
+  @apply m-auto my-5 px-0;
+  @apply border-none;
+  @apply overflow-hidden;
+  @apply outline-none;
+
+  & > .interval-item {
+    @apply flex place-items-center;
+    @apply px-4 py-0.5;
+    @apply font-merriweather;
+    @apply text-[13px];
+    @apply border-none;
+    @apply rounded-[10px];
+    @apply my-1.5 mx-1;
+    @apply outline-none;
+    @apply hover:bg-primary;
+    @apply text-white;
+    @apply no-tap-effect;
+    @apply transition-colors duration-150;
+
+    &.selected {
+      @apply text-white;
+      @apply bg-primary;
+    }
+  }
+}
+
+.dashboard-data {
+  @apply grid grid-cols-2 auto-rows-min;
+  @apply gap-x-5;
+  @apply outline-none focus:outline-none;
+}

@@ -1,5 +1,6 @@
 .header-bar {
   @apply flex justify-between;
+  @apply max-w-4xl m-auto;
 
   & > .app-title {
     @apply flex items-end;
