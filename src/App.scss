@@ -1,10 +1,10 @@
 .App {
-  background-color: #a08ce3;
-
+  @apply bg-[#F1EFFB];
   @apply min-h-screen max-h-full;
   @apply px-5 py-2;
 
-  .dashboard-page {
+  .dashboard-page,
+  .graphs-page {
     @apply max-w-2xl mx-auto;
   }
 }

@@ -8,9 +8,8 @@
   }
 
   & .app-title,
-  & .app-date,
-  & .app-install-btn {
-    @apply text-white font-oswald;
+  & .app-date {
+    @apply text-primary-darker font-oswald;
   }
 
   & .app-date {
@@ -26,9 +25,10 @@
       @apply outline-none focus:outline-none;
       @apply text-sm uppercase;
       @apply bg-secondary rounded-lg;
-      @apply shadow-lg;
       @apply w-16;
       @apply active:bg-secondary-darker;
+      @apply text-white;
+      @apply shadow;
     }
   }
 }

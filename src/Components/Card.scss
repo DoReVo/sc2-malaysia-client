@@ -1,11 +1,14 @@
 .card {
   @apply grid grid-cols-12;
   @apply px-3 py-2;
-  @apply bg-primary-darker;
-  @apply filter drop-shadow;
+  @apply bg-white;
 
   &:not(.card-main):not(.dose) {
     @apply min-h-[130px];
+
+    & > .card-data {
+      @apply mt-5 mb-3;
+    }
   }
 
   &:not(.card-main) {
@@ -17,7 +20,7 @@
     @apply col-span-full;
 
     & > .card-title {
-      @apply bg-primary-lightest;
+      @apply bg-primary;
       @apply rounded-xl;
       @apply py-1 px-2;
       @apply col-span-6;
@@ -55,7 +58,7 @@
         @apply font-merriweather;
         @apply font-bold;
         @apply flex flex-col;
-        @apply text-white;
+        @apply text-primary;
       }
 
       & > .trend-svg {
@@ -65,7 +68,7 @@
   }
 
   & > .card-data {
-    @apply text-center text-white;
+    @apply text-center text-primary-darker;
     @apply font-merriweather font-bold;
 
     font-feature-settings: "pnum" on, "lnum" on, "zero" on, "liga" on;
@@ -79,7 +82,7 @@
 
   & > .as-of-date {
     @apply col-span-full place-self-end;
-    @apply text-right text-white text-sm italic;
+    @apply text-right text-primary-lightest text-sm italic;
   }
 }
 
@@ -112,7 +115,7 @@
 
     & > span {
       @apply text-xs;
-      @apply text-white;
+      @apply text-primary-darker;
     }
   }
 
