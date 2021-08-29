@@ -1,0 +1,9 @@
+.graphs-page {
+  & > .graph-card-main {
+    row-gap: 1em;
+
+    .graph-svg {
+      @apply row-start-2 col-span-full;
+    }
+  }
+}

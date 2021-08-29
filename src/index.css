@@ -3,6 +3,7 @@
 @import "tailwindcss/utilities";
 @import "./App.scss";
 @import "./Pages/Dashboard.scss";
+@import "./Pages/Graphs.scss";
 @import "./Components/Card.scss";
 @import "./Components/HeaderBar.scss";
 @import "./Components//RefreshPrompt.scss";
