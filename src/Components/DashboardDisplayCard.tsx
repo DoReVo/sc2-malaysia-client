@@ -1,3 +1,4 @@
+import { useNavigate } from "@reach/router";
 import React from "react";
 import { ReactElement } from "react";
 interface CardProps {
@@ -5,7 +6,7 @@ interface CardProps {
   data: number;
   date: string;
   className?: string;
-  interval: Dashboard.interval;
+  category: "cases" | "deaths" | "vaccinated";
   trendNumber: number;
 }
 
@@ -15,7 +16,7 @@ function DashboardDisplayCard({
   date,
   trendNumber,
   className,
-  interval,
+  category,
 }: CardProps): ReactElement<CardProps> {
   const renderDate = (date: string) => {
     return new Date(date).toLocaleDateString();
@@ -33,6 +34,8 @@ function DashboardDisplayCard({
     else if (!isCasesOrDeaths && isPositive) return "#55d6c2";
     else return "#f36a68";
   };
+
+  const navigate = useNavigate();
 
   const shouldRenderSvg = trendNumber !== 0;
 
@@ -58,7 +61,10 @@ function DashboardDisplayCard({
     );
 
   return (
-    <div className={`card${className ? ` ${className}` : ""}`}>
+    <div
+      className={`card${className ? ` ${className}` : ""}`}
+      onClick={() => navigate(`/graphs/${category}`)}
+    >
       <div className="card-title">
         <div></div>
         <span>{title}</span>

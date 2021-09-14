@@ -104,7 +104,7 @@ function Dashboard(_: RouteComponentProps): ReactElement<RouteComponentProps> {
           date={currentIntervalData().cases.as_of}
           className="card-main card-case"
           title={"Positive Cases"}
-          interval={dataInterval}
+          category="cases"
           trendNumber={
             currentIntervalData()?.cases?.perfomanceBetweenInterval?.cases ??
             (null as any)
@@ -115,7 +115,7 @@ function Dashboard(_: RouteComponentProps): ReactElement<RouteComponentProps> {
           date={currentIntervalData().deaths.as_of}
           className="card-death"
           title={"Deaths"}
-          interval={dataInterval}
+          category="deaths"
           trendNumber={
             currentIntervalData()?.deaths?.perfomanceBetweenInterval?.deaths ??
             (null as any)
@@ -126,7 +126,7 @@ function Dashboard(_: RouteComponentProps): ReactElement<RouteComponentProps> {
           date={currentIntervalData().vaccinated.as_of}
           className="card-vaccinated"
           title={"Vaccinated"}
-          interval={dataInterval}
+          category="vaccinated"
           trendNumber={
             currentIntervalData()?.vaccinated?.perfomanceBetweenInterval
               ?.total ?? (null as any)
@@ -137,7 +137,7 @@ function Dashboard(_: RouteComponentProps): ReactElement<RouteComponentProps> {
           date={currentIntervalData().vaccinated.as_of}
           title={"Dose 1"}
           className="dose"
-          interval={dataInterval}
+          category="vaccinated"
           trendNumber={
             currentIntervalData()?.vaccinated?.perfomanceBetweenInterval
               ?.firstDose ?? (null as any)
@@ -148,7 +148,7 @@ function Dashboard(_: RouteComponentProps): ReactElement<RouteComponentProps> {
           date={currentIntervalData().vaccinated.as_of}
           title={"Dose 2"}
           className="dose"
-          interval={dataInterval}
+          category="vaccinated"
           trendNumber={
             currentIntervalData()?.vaccinated?.perfomanceBetweenInterval
               ?.secondDose ?? (null as any)

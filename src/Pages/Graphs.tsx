@@ -19,6 +19,7 @@ interface CategoryData {
   dataKey: "cases_new" | "deaths_new" | "total";
   labelKey: "New Cases" | "Deaths" | "Vaccinated";
   cardClass: "card-case" | "card-death" | "card-vaccinated";
+  highlightColor: "#f36a68" | "#ffd633" | "#55d6c2";
 }
 
 function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
@@ -38,6 +39,7 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
       dataKey: "cases_new",
       labelKey: "New Cases",
       cardClass: "card-case",
+      highlightColor: "#ffd633",
     },
     {
       for: "deaths",
@@ -45,6 +47,7 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
       dataKey: "deaths_new",
       labelKey: "Deaths",
       cardClass: "card-death",
+      highlightColor: "#f36a68",
     },
     {
       for: "vaccinated",
@@ -52,6 +55,7 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
       dataKey: "total",
       labelKey: "Vaccinated",
       cardClass: "card-vaccinated",
+      highlightColor: "#55d6c2",
     },
   ];
 
@@ -141,7 +145,6 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
 
   const getData: any = () => {
     const { category } = params;
-
     let data;
 
     switch (category) {
@@ -157,6 +160,81 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
 
       default:
         data = getCasesData(selectedInterval!.value as any);
+        break;
+    }
+
+    return data;
+  };
+
+  const getStatsData = () => {
+    const { category } = params;
+    let data;
+
+    switch (category) {
+      case "cases":
+        data = {
+          allTime: {
+            data: highestStats?.allTime.rawCase.cases_new,
+            date: highestStats?.allTime.rawCase.date,
+          },
+          weekly: {
+            data: highestStats?.weeklyInterval.rawCase.cases_new,
+            date: highestStats?.weeklyInterval.rawCase.date,
+          },
+          monthly: {
+            data: highestStats?.monthlyInterval.rawCase.cases_new,
+            date: highestStats?.monthlyInterval.rawCase.date,
+          },
+        };
+        break;
+      case "deaths":
+        data = {
+          allTime: {
+            data: highestStats?.allTime.rawDeath.deaths_new,
+            date: highestStats?.allTime.rawDeath.date,
+          },
+          weekly: {
+            data: highestStats?.weeklyInterval.rawDeath.deaths_new,
+            date: highestStats?.weeklyInterval.rawDeath.date,
+          },
+          monthly: {
+            data: highestStats?.monthlyInterval.rawDeath.deaths_new,
+            date: highestStats?.monthlyInterval.rawDeath.date,
+          },
+        };
+        break;
+      case "vaccinated":
+        data = {
+          allTime: {
+            data: highestStats?.allTime.RawVaccinated.total,
+            date: highestStats?.allTime.RawVaccinated.date,
+          },
+          weekly: {
+            data: highestStats?.weeklyInterval.RawVaccinated.total,
+            date: highestStats?.weeklyInterval.RawVaccinated.date,
+          },
+          monthly: {
+            data: highestStats?.monthlyInterval.RawVaccinated.total,
+            date: highestStats?.monthlyInterval.RawVaccinated.date,
+          },
+        };
+        break;
+
+      default:
+        data = {
+          allTime: {
+            data: highestStats?.allTime.rawCase.cases_new,
+            date: highestStats?.allTime.rawCase.date,
+          },
+          weekly: {
+            data: highestStats?.weeklyInterval.rawCase.cases_new,
+            date: highestStats?.weeklyInterval.rawCase.date,
+          },
+          monthly: {
+            data: highestStats?.monthlyInterval.rawCase.cases_new,
+            date: highestStats?.monthlyInterval.rawCase.date,
+          },
+        };
         break;
     }
 
@@ -287,12 +365,17 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
               axisLine={false}
               tickLine={false}
               tickFormatter={tickFormatter}
-              interval="preserveStartEnd"
+              interval="preserveStart"
+              style={{
+                fontSize: "0.8em",
+                fontFamily: "Oswald, sans-serif",
+                color: "#3a3a3a",
+              }}
             />
             <Tooltip labelFormatter={labelFormatter} formatter={formatter} />
             <Bar
               dataKey={getCategoryData()?.dataKey || "cases_new"}
-              fill="#856BDB"
+              fill="#937CDF"
               barSize={25}
               radius={[10, 10, 0, 0]}
             />
@@ -314,7 +397,7 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
             singleValue: (style) => ({
               ...style,
               textAlign: "center",
-              fontFamily: "Merriweather sans-serif",
+              fontFamily: "Merriweather, sans-serif",
               fontWeight: "bold",
               letterSpacing: "1.25px",
               color: "#937CDF",
@@ -324,12 +407,15 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
       </div>
       <div className="bg-white p-6 grid grid-cols-6 rounded-xl">
         <li className="col-span-full text-primary font-montserrat text-sm leading-7 mb-3">
-          <span className="bg-[#f36a68] text-white p-1 rounded text-xs">
+          <span
+            className="text-white p-1 rounded text-xs"
+            style={{ backgroundColor: getCategoryData()?.highlightColor }}
+          >
             Highest recorded
           </span>{" "}
-          case was{" "}
+          {getCategoryData()?.for} was{" "}
           <span className="bg-primary-lightest text-white rounded p-1 t text-xs">
-            {highestStats?.allTime?.rawCase?.cases_new?.toLocaleString() || 0}
+            {getStatsData().allTime.data?.toLocaleString() || 0}
           </span>{" "}
           on{" "}
           {DateTime.fromISO(
@@ -342,13 +428,15 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
         </li>
         <li className="col-span-full text-primary font-montserrat text-sm leading-7 mb-3">
           Highest in the{" "}
-          <span className="bg-[#f36a68] text-white p-1 rounded text-xs">
+          <span
+            className="text-white p-1 rounded text-xs"
+            style={{ backgroundColor: getCategoryData()?.highlightColor }}
+          >
             past 7 days
           </span>{" "}
           , was{" "}
           <span className="bg-primary-lightest text-white rounded p-1 text-xs">
-            {highestStats?.weeklyInterval?.rawCase?.cases_new?.toLocaleString() ||
-              0}
+            {getStatsData().weekly.data?.toLocaleString() || 0}
           </span>{" "}
           on{" "}
           {DateTime.fromISO(
@@ -361,13 +449,15 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
         </li>
         <li className="col-span-full text-primary font-montserrat text-sm leading-7 mb-3">
           Highest in the{" "}
-          <span className="bg-[#f36a68] text-white p-1 rounded text-xs">
+          <span
+            className="text-white p-1 rounded text-xs"
+            style={{ backgroundColor: getCategoryData()?.highlightColor }}
+          >
             past 30 days
           </span>{" "}
           , was{" "}
           <span className="bg-primary-lightest text-white rounded p-1 text-xs">
-            {highestStats?.monthlyInterval?.rawCase?.cases_new?.toLocaleString() ||
-              0}
+            {getStatsData().monthly.data?.toLocaleString() || 0}
           </span>{" "}
           on{" "}
           {DateTime.fromISO(
