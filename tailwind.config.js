@@ -21,7 +21,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        merriweather: ["Merriweather", "serif"],
+        merriweather: ["Merriweather", "sans-serif"],
         oswald: ["Oswald", "sans-serif"],
         montserrat: ["Montserrat", "sans-serif"],
       },

@@ -90,7 +90,9 @@
   @apply rounded-2xl;
   @apply mb-5;
   @apply min-h-[200px];
+}
 
+.card-case {
   & > .card-title > div {
     background-color: #ffda47;
   }

@@ -102,7 +102,7 @@ function Dashboard(_: RouteComponentProps): ReactElement<RouteComponentProps> {
         <DashboardDisplayCard
           data={currentIntervalData().cases.cases}
           date={currentIntervalData().cases.as_of}
-          className="card-main"
+          className="card-main card-case"
           title={"Positive Cases"}
           interval={dataInterval}
           trendNumber={

@@ -34,7 +34,7 @@ function App() {
         <HeaderBar InstallPrompt={prompt} installed={installed} />
         <Router>
           <Dashboard path="/" />
-          <Graphs path="/graphs" />
+          <Graphs path="/graphs/:category" />
         </Router>
         <RefreshPrompt />
       </div>

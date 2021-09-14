@@ -1,4 +1,8 @@
 .graphs-page {
+  .card-interval-control {
+    @apply mb-5 m-auto;
+  }
+
   & > .graph-card-main {
     row-gap: 1em;
 

@@ -1,8 +1,8 @@
-import { RouteComponentProps } from "@reach/router";
+import { RouteComponentProps, useNavigate, useParams } from "@reach/router";
 import { maxBy } from "lodash";
 import { DateTime } from "luxon";
-import React, { ReactElement, useState } from "react";
-import { useEffect } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
+import Select from "react-select";
 import {
   Bar,
   BarChart,
@@ -11,12 +11,49 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis,
 } from "recharts";
+
+interface CategoryData {
+  for: "cases" | "deaths" | "vaccinated";
+  title: string;
+  dataKey: "cases_new" | "deaths_new" | "total";
+  labelKey: "New Cases" | "Deaths" | "Vaccinated";
+  cardClass: "card-case" | "card-death" | "card-vaccinated";
+}
 
 function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
   const [graphData, setGraphData] = useState<GraphsData | null>(null);
   const [highestStats, setHighestStats] = useState<HighestStats | null>(null);
+  const [selectedInterval, setSelectedInterval] = useState({
+    value: "weekly",
+    label: "Weekly",
+  });
+  const params = useParams();
+  const navigate = useNavigate();
+
+  const categoryData: CategoryData[] = [
+    {
+      for: "cases",
+      title: "Positive Cases",
+      dataKey: "cases_new",
+      labelKey: "New Cases",
+      cardClass: "card-case",
+    },
+    {
+      for: "deaths",
+      title: "Deaths",
+      dataKey: "deaths_new",
+      labelKey: "Deaths",
+      cardClass: "card-death",
+    },
+    {
+      for: "vaccinated",
+      title: "Vaccinated",
+      dataKey: "total",
+      labelKey: "Vaccinated",
+      cardClass: "card-vaccinated",
+    },
+  ];
 
   const getGraphData = async () => {
     const API_URL = import.meta.env.VITE_API_URL;
@@ -47,8 +84,8 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
 
   const getCasesData = (interval: "weekly" | "monthly" = "weekly") => {
     const now = DateTime.now().startOf("day");
-    const aMonthAgo = now.minus({ month: 1 });
-    const aWeekAgo = now.minus({ week: 1 });
+    const aMonthAgo = now.minus({ months: 1 });
+    const aWeekAgo = now.minus({ weeks: 1 });
 
     const intervalData = graphData?.rawCases.filter((row: any) => {
       const rowDate = DateTime.fromISO(row.date);
@@ -66,8 +103,8 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
 
   const getDeathsData = (interval: "weekly" | "monthly" = "weekly") => {
     const now = DateTime.now().startOf("day");
-    const aMonthAgo = now.minus({ month: 1 });
-    const aWeekAgo = now.minus({ week: 1 });
+    const aMonthAgo = now.minus({ months: 1 });
+    const aWeekAgo = now.minus({ weeks: 1 });
 
     const intervalData = graphData?.rawDeaths.filter((row: any) => {
       const rowDate = DateTime.fromISO(row.date);
@@ -85,8 +122,8 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
 
   const getVaccinatedData = (interval: "weekly" | "monthly" = "weekly") => {
     const now = DateTime.now().startOf("day");
-    const aMonthAgo = now.minus({ month: 1 });
-    const aWeekAgo = now.minus({ week: 1 });
+    const aMonthAgo = now.minus({ months: 1 });
+    const aWeekAgo = now.minus({ weeks: 1 });
 
     const intervalData = graphData?.rawVaccinated.filter((row: any) => {
       const rowDate = DateTime.fromISO(row.date);
@@ -100,6 +137,49 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
     });
 
     return intervalData;
+  };
+
+  const getData: any = () => {
+    const { category } = params;
+
+    let data;
+
+    switch (category) {
+      case "cases":
+        data = getCasesData(selectedInterval!.value as any);
+        break;
+      case "deaths":
+        data = getDeathsData(selectedInterval!.value as any);
+        break;
+      case "vaccinated":
+        data = getVaccinatedData(selectedInterval!.value as any);
+        break;
+
+      default:
+        data = getCasesData(selectedInterval!.value as any);
+        break;
+    }
+
+    return data;
+  };
+
+  const getCategoryData = () => {
+    const { category } = params;
+
+    let data;
+
+    switch (category) {
+      case "cases":
+      case "deaths":
+      case "vaccinated":
+        data = categoryData.find((d) => d.for === category);
+        break;
+      default:
+        data = categoryData.find((d) => d.for === "cases");
+        break;
+    }
+
+    return data;
   };
 
   const calculateHighestStats = () => {
@@ -135,6 +215,8 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
     });
   };
 
+  const routeCategoy = ["Cases", "Deaths", "Vaccinated"];
+
   useEffect(() => {
     getGraphData();
   }, []);
@@ -145,7 +227,7 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
 
   const tickFormatter = (value: string) => {
     return DateTime.fromISO(value).toLocaleString({
-      day: "numeric",
+      day: "2-digit",
       month: "2-digit",
     });
   };
@@ -158,36 +240,87 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
     });
   };
 
-  const formatter = (value: string, _, __) => {
-    return [Number(value).toLocaleString(), "New Cases"];
+  const formatter = (value: string, _: any, __: any) => {
+    return [
+      Number(value).toLocaleString(),
+      getCategoryData()?.labelKey || "New Cases",
+    ];
   };
+
+  const intervalSelection: any = [
+    { value: "weekly", label: "Weekly" },
+    { value: "monthly", label: "Monthly" },
+  ];
 
   return (
     <div className="graphs-page">
-      <div className="card card-main graph-card-main">
+      <div className="interval-group">
+        {routeCategoy.map((categoryName, index) => {
+          const { category } = params;
+
+          return (
+            <div
+              onClick={() => navigate(categoryName.toLowerCase())}
+              className={`interval-item${
+                category === categoryName.toLowerCase() ? " selected" : ""
+              }`}
+              key={index}
+            >
+              {categoryName}
+            </div>
+          );
+        })}
+      </div>
+      <div
+        className={`card card-main graph-card-main ${
+          getCategoryData()?.cardClass
+        }`}
+      >
         <div className="card-title">
           <div></div>
-          <span>Positive Cases</span>
+          <span>{getCategoryData()?.title || "Positive Cases"}</span>
         </div>
         <ResponsiveContainer width="100%" className="graph-svg">
-          <BarChart data={getCasesData("weekly") || []}>
+          <BarChart data={getData() || []}>
             <XAxis
               dataKey={"date"}
               axisLine={false}
               tickLine={false}
               tickFormatter={tickFormatter}
-              interval={6}
+              interval="preserveStartEnd"
             />
             <Tooltip labelFormatter={labelFormatter} formatter={formatter} />
-            <Line
-              type="natural"
-              dataKey="cases_new"
-              stroke="#856BDB"
-              dot={{ stroke: "#A08CE3" }}
+            <Bar
+              dataKey={getCategoryData()?.dataKey || "cases_new"}
+              fill="#856BDB"
+              barSize={25}
+              radius={[10, 10, 0, 0]}
             />
-            <Bar type="" dataKey="cases_new" fill="#856BDB" barSize={20} />
           </BarChart>
         </ResponsiveContainer>
+      </div>
+      <div className="card-interval-control">
+        <Select
+          options={intervalSelection}
+          defaultValue={selectedInterval}
+          onChange={(value) => setSelectedInterval(value!)}
+          styles={{
+            control: (style) => ({ ...style, border: "none" }),
+            valueContainer: (style) => ({
+              ...style,
+              display: "flex",
+              justifyContent: "center",
+            }),
+            singleValue: (style) => ({
+              ...style,
+              textAlign: "center",
+              fontFamily: "Merriweather sans-serif",
+              fontWeight: "bold",
+              letterSpacing: "1.25px",
+              color: "#937CDF",
+            }),
+          }}
+        ></Select>
       </div>
       <div className="bg-white p-6 grid grid-cols-6 rounded-xl">
         <li className="col-span-full text-primary font-montserrat text-sm leading-7 mb-3">
