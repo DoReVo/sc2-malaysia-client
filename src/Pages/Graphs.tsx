@@ -179,7 +179,6 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
               interval={6}
             />
             <Tooltip labelFormatter={labelFormatter} formatter={formatter} />
-            <YAxis axisLine={false} tick={false} />
             <Line
               type="natural"
               dataKey="cases_new"
