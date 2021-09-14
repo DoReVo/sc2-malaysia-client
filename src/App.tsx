@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Dashboard from "./Pages/Dashboard";
 import { Router } from "@reach/router";
 import Graphs from "./Pages/Graphs";
@@ -29,15 +29,17 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <HeaderBar InstallPrompt={prompt} installed={installed} />
-      <Router>
-        <Dashboard path="/" />
-        <Graphs path="/graphs" />
-      </Router>
-      <RefreshPrompt />
+    <Fragment>
+      <div className="App">
+        <HeaderBar InstallPrompt={prompt} installed={installed} />
+        <Router>
+          <Dashboard path="/" />
+          <Graphs path="/graphs" />
+        </Router>
+        <RefreshPrompt />
+      </div>
       <AppVersion />
-    </div>
+    </Fragment>
   );
 }
 
