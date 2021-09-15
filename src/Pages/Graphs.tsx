@@ -450,9 +450,7 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
             {getStatsData().allTime.data?.toLocaleString() || 0}
           </span>{" "}
           on{" "}
-          {DateTime.fromISO(
-            highestStats?.allTime?.rawCase?.date!
-          )?.toLocaleString({
+          {DateTime.fromISO(getStatsData().allTime.date!)?.toLocaleString({
             day: "numeric",
             month: "long",
             year: "numeric",
@@ -471,9 +469,7 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
             {getStatsData().weekly.data?.toLocaleString() || 0}
           </span>{" "}
           on{" "}
-          {DateTime.fromISO(
-            highestStats?.weeklyInterval?.rawCase.date!
-          ).toLocaleString({
+          {DateTime.fromISO(getStatsData().weekly.date!).toLocaleString({
             day: "numeric",
             month: "long",
             year: "numeric",
@@ -492,27 +488,13 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
             {getStatsData().monthly.data?.toLocaleString() || 0}
           </span>{" "}
           on{" "}
-          {DateTime.fromISO(
-            highestStats?.monthlyInterval?.rawCase.date!
-          ).toLocaleString({
+          {DateTime.fromISO(getStatsData().monthly.date!).toLocaleString({
             day: "numeric",
             month: "long",
             year: "numeric",
           })}
         </li>
       </div>
-      {/* <div className="card card-death h-[200px]">
-        <div className="card-title">
-          <div></div>
-          <span>Deaths</span>
-        </div>
-      </div>
-      <div className="card card-vaccinated h-[200px]">
-        <div className="card-title">
-          <div></div>
-          <span>Vaccinated</span>
-        </div>
-      </div> */}
     </div>
   );
 }
