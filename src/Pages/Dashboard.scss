@@ -21,12 +21,15 @@
     @apply rounded-[10px];
     @apply my-1.5 mx-1;
     @apply outline-none;
-    @apply hover:bg-primary-darker;
     @apply text-white;
     @apply no-tap-effect;
     @apply transition-colors duration-150;
 
     &.selected {
+      @media (hover: hover) {
+        @apply hover:bg-primary-darker;
+      }
+
       @apply text-white;
       @apply bg-primary-darker;
     }
