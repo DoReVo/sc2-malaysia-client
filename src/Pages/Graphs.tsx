@@ -377,6 +377,7 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
       </div>
       <div className="card-interval-control">
         <Select
+          isSearchable={false}
           options={intervalSelection}
           defaultValue={selectedInterval}
           onChange={(value) => setSelectedInterval(value!)}
@@ -394,6 +395,14 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
               fontWeight: "bold",
               letterSpacing: "1.25px",
               color: "#937CDF",
+            }),
+            option: (style, { isSelected }) => ({
+              ...style,
+              color: isSelected ? "#FFFFFF" : "#937CDF",
+              fontFamily: "Merriweather, sans-serif",
+              fontWeight: "bold",
+              letterSpacing: "1.25px",
+              backgroundColor: isSelected ? "#937CDF" : "#FFFFFF",
             }),
           }}
         ></Select>
