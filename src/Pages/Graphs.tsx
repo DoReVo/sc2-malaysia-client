@@ -384,7 +384,7 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
           <BarChart data={getData() || []}>
             <XAxis
               dataKey={"date"}
-              axisLine={{ stroke: "#856BDB" }}
+              axisLine={false}
               dy={5}
               tickLine={false}
               tickFormatter={tickFormatter}
@@ -400,7 +400,7 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
               dataKey={getCategoryData()?.dataKey || "cases_new"}
               fill="#937CDF"
               barSize={15}
-              radius={[10, 10, 0, 0]}
+              radius={10}
             />
           </BarChart>
         </ResponsiveContainer>
