@@ -133,6 +133,13 @@ export default ({ mode }) => {
             brotliSize: true,
           }),
         ],
+        output: {
+          manualChunks: {
+            lodash: ["lodash-es"],
+            recharts: ["recharts"],
+            luxon: ["luxon"],
+          },
+        },
       },
     },
 

@@ -1,17 +1,9 @@
 import { RouteComponentProps, useNavigate, useParams } from "@reach/router";
-import { maxBy } from "lodash";
+import { maxBy } from "lodash-es";
 import { DateTime } from "luxon";
 import React, { ReactElement, useEffect, useState } from "react";
 import Select from "react-select";
-import {
-  Bar,
-  BarChart,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-} from "recharts";
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 
 interface CategoryData {
   for: "cases" | "deaths" | "vaccinated";
