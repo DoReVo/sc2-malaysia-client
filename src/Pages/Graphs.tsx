@@ -3,6 +3,7 @@ import { maxBy } from "lodash-es";
 import { DateTime } from "luxon";
 import React, { ReactElement, useEffect, useState } from "react";
 import Select from "react-select";
+import { useDrag } from "react-use-gesture";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 
 interface CategoryData {
@@ -21,6 +22,9 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
     value: "weekly",
     label: "Weekly",
   });
+
+  const routeCategoy = ["Cases", "Deaths", "Vaccinated"];
+
   const params = useParams();
   const navigate = useNavigate();
 
@@ -50,6 +54,34 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
       highlightColor: "#55d6c2",
     },
   ];
+
+  const bindSwipe = useDrag(
+    ({ swipe: [swipeX] }) => {
+      if (swipeX !== 0) {
+        // Find the index of the currently selected interval
+        const index = routeCategoy.findIndex(
+          (category) => category.toLowerCase() === params.category
+        );
+        // If swiping left, go right
+        if (swipeX === -1) {
+          if (index < 2) {
+            navigate(routeCategoy[index + 1].toLowerCase());
+          }
+        }
+        // If swiping right, go left
+        if (swipeX === 1) {
+          if (index > 0) {
+            navigate(routeCategoy[index - 1].toLowerCase());
+          }
+        }
+      }
+    },
+    {
+      filterTaps: true,
+      swipeDistance: 5,
+      swipeVelocity: 0.1,
+    }
+  );
 
   const getGraphData = async () => {
     const API_URL = import.meta.env.VITE_API_URL;
@@ -285,8 +317,6 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
     });
   };
 
-  const routeCategoy = ["Cases", "Deaths", "Vaccinated"];
-
   useEffect(() => {
     getGraphData();
   }, []);
@@ -323,7 +353,7 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
   ];
 
   return (
-    <div className="graphs-page">
+    <div className="graphs-page" {...bindSwipe()}>
       <div className="interval-group">
         {routeCategoy.map((categoryName, index) => {
           const { category } = params;
