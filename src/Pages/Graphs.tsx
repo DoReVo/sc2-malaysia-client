@@ -65,13 +65,13 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
         // If swiping left, go right
         if (swipeX === -1) {
           if (index < 2) {
-            navigate(routeCategoy[index + 1].toLowerCase());
+            navigate(routeCategoy[index + 1].toLowerCase(), { replace: true });
           }
         }
         // If swiping right, go left
         if (swipeX === 1) {
           if (index > 0) {
-            navigate(routeCategoy[index - 1].toLowerCase());
+            navigate(routeCategoy[index - 1].toLowerCase(), { replace: true });
           }
         }
       }
@@ -360,7 +360,9 @@ function Graphs(_: RouteComponentProps): ReactElement<RouteComponentProps> {
 
           return (
             <div
-              onClick={() => navigate(categoryName.toLowerCase())}
+              onClick={() =>
+                navigate(categoryName.toLowerCase(), { replace: true })
+              }
               className={`interval-item${
                 category === categoryName.toLowerCase() ? " selected" : ""
               }`}
