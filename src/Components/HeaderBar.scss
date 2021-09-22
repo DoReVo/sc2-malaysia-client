@@ -5,6 +5,13 @@
   & > .app-title {
     @apply flex items-end;
     @apply text-xl font-bold uppercase;
+
+    button {
+      @apply no-tap-effect;
+      @apply focus:outline-none;
+      @apply transition-colors duration-150 active:bg-gray-300;
+      @apply lg:hidden;
+    }
   }
 
   & .app-title,

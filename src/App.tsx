@@ -8,6 +8,7 @@ import useInstallState from "./Hooks/useInstallState";
 import { useEffect } from "react";
 import RefreshPrompt from "./Components/RefreshPrompt";
 import AppVersion from "./Components/AppVersion";
+import Sidebar from "./Components/Sidebar";
 
 function App() {
   const [prompt, setPrompt] = useInstallPrompt(null);
@@ -31,6 +32,7 @@ function App() {
   return (
     <Fragment>
       <div className="App">
+        <Sidebar />
         <HeaderBar InstallPrompt={prompt} installed={installed} />
         <Router>
           <Dashboard path="/" />
