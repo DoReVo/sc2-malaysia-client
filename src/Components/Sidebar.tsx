@@ -107,7 +107,7 @@ function Sidebar(): ReactElement<SidebarProps> {
           </button>
         </div>
 
-        <ul className="px-5">
+        <ul className="px-7">
           {items.map((item) => (
             <Link
               key={item.path}
