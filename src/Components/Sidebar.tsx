@@ -1,8 +1,13 @@
-import React, { FunctionComponent } from "react";
+import { Link, useMatch, useNavigate } from "@reach/router";
+import { useAtom } from "jotai";
+import React, { ReactElement, useState } from "react";
+import { sideBarStateAtom } from "../Atoms";
 
 interface SidebarProps {}
 
-const Sidebar: FunctionComponent<SidebarProps> = () => {
+function Sidebar(): ReactElement<SidebarProps> {
+  const [isOpen, setIsOpen] = useAtom(sideBarStateAtom);
+
   const items = [
     {
       icon: (
@@ -42,43 +47,81 @@ const Sidebar: FunctionComponent<SidebarProps> = () => {
         </svg>
       ),
       text: "Graphs",
-      path: "/graphs",
+      path: "/graphs/cases",
     },
-    {
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-      ),
-      text: "About",
-    },
+    // {
+    //   icon: (
+    //     <svg
+    //       xmlns="http://www.w3.org/2000/svg"
+    //       className="h-6 w-6"
+    //       fill="none"
+    //       viewBox="0 0 24 24"
+    //       stroke="currentColor"
+    //     >
+    //       <path
+    //         strokeLinecap="round"
+    //         strokeLinejoin="round"
+    //         strokeWidth={2}
+    //         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+    //       />
+    //     </svg>
+    //   ),
+    //   text: "About",
+    //   path: "/about",
+    // },
   ];
 
+  const closeSideBar = (e: any) => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div className="fixed left-0 top-0 w-full h-full bg-gray-500 z-10 bg-opacity-50">
-      <div className="fixed bg-[#F1EFFB] left-0 top-0 h-full z-20 w-48 px-5 py-10">
-        <ul>
+    <div
+      className={`${
+        isOpen ? "sidebar-overlay-open " : "sidebar-overlay-closed "
+      }sidebar-overlay`}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) closeSideBar(e);
+      }}
+    >
+      <div className={`${isOpen ? "sidebar-open " : "sidebar-closed "}sidebar`}>
+        <div className="w-full flex justify-end py-3 px-5">
+          <button
+            onClick={(e) => closeSideBar(e)}
+            className="focus:outline-none no-tap-effect"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <ul className="px-5">
           {items.map((item) => (
-            <li className={`flex items-end justify-start space-x-2 space-y-3`}>
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`flex items-end justify-start space-x-2 space-y-3 cursor-pointer`}
+            >
               {item.icon}
               <span className="font-oswald text-lg ">{item.text}</span>
-            </li>
+            </Link>
           ))}
         </ul>
       </div>
     </div>
   );
-};
+}
 
 export default Sidebar;

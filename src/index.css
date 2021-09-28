@@ -6,7 +6,8 @@
 @import "./Pages/Graphs.scss";
 @import "./Components/Card.scss";
 @import "./Components/HeaderBar.scss";
-@import "./Components//RefreshPrompt.scss";
+@import "./Components/RefreshPrompt.scss";
+@import "./Components/SideBar.scss";
 
 @layer components {
   .no-tap-effect {

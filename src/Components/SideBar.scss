@@ -1,0 +1,24 @@
+.sidebar-closed {
+  @apply -left-full;
+}
+
+.sidebar-open {
+  @apply left-0;
+}
+
+.sidebar {
+  @apply fixed bg-[#F1EFFB] top-0 h-full z-20 w-48;
+  @apply transition-all duration-500;
+}
+
+.sidebar-overlay {
+  @apply transition-all duration-500;
+}
+
+.sidebar-overlay-open {
+  @apply fixed left-0 top-0 w-full h-full bg-gray-500 z-10 bg-opacity-50;
+}
+
+.sidebar-overlay-closed {
+  @apply invisible;
+}
